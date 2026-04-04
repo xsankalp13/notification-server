@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "setup": "bash scripts/setup-localstack.sh",
     "dev:email": "ts-node src/workers/email.worker.ts",
     "dev:whatsapp": "ts-node src/workers/whatsapp.worker.ts"
   },
