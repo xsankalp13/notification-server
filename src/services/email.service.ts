@@ -1,4 +1,16 @@
 import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+// Validate required env vars at startup
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+if (!RESEND_API_KEY) {
+    console.error("❌ FATAL: RESEND_API_KEY env var is not set.");
+    process.exit(1);
+}
+
+const SENDER_EMAIL = process.env.SENDER_EMAIL || "onboarding@resend.dev";
 
 // Create the SMTP transporter once (reused across all calls)
 const transporter = nodemailer.createTransport({
@@ -7,11 +19,9 @@ const transporter = nodemailer.createTransport({
     secure: false,
     auth: {
         user: "resend",
-        pass: process.env.RESEND_API_KEY!,
+        pass: RESEND_API_KEY,
     },
 });
-
-const SENDER_EMAIL = process.env.SENDER_EMAIL || "onboarding@resend.dev";
 
 export async function sendEmail(
     to: string,

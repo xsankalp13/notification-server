@@ -1,4 +1,4 @@
-export function parseSQSMessage(message: string) {
+export function parseSQSMessage(message: string): unknown {
     const body = JSON.parse(message);
 
     // SNS wraps message inside "Message"
